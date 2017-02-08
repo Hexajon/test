@@ -1,0 +1,43 @@
+
+struct WORD {
+	char *key;		//单词
+	int n_trans;	//单词解释个数
+	char **trans;	//单词解释
+};
+
+一.文件
+FILE *dict_text, *dict_bin;
+二.单词数组
+struct WORD *word;
+//struct WORD word[];
+三.单词个数
+int nword;
+四.用户输入数组
+char usrbuf[256];
+
+函数接口设计
+//统计词库文件filename中有多少单词
+int word_cnt(char *filename);
+//从文本文件里加载单词到数组里
+int init_wordarray(char *filename, struct WORD *word, int nword);
+//对结构体数组进行排序(冒泡，选择)
+int sort_wordarray(struct WORD *word, int nword);
+//在已排序数组里面二分查找key，找到返回单词地址，否则NULL
+struct WORD *search_word(struct WORD *word, int nword, char *key);
+//输出单词解释
+int show_word(struct WORD *word);
+//根据排序的结构体数组，创建二进制文件
+int creat_wordbin(struct WORD *word, int nword, char *binname);
+//统计二进制文件里有多少单词
+int word_bin_cnt(char *binname);
+//加载二进制文件单词，到数组里 
+int init_wordarry_bin(char *filename, struct WORD *word, int nword);
+//int init_wordarry_bin(char *filename, struct WORD **word, int *nword);
+//释放malloc申请的内存，注意释放顺序
+int free_word(struct WORD *word, int nword);
+
+
+
+
+
+
